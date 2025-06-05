@@ -130,6 +130,71 @@ sudo apt install build-essential -y
 <br>
 <br>
 
+# 🛠️ Abrindo o Projeto no VS Code
+programar e editar o projeto diretamente no Visual Studio Code:
+
+## 1. Instale as Extensões Necessárias no VS Code
+- Remote - WSL
+
+- C/C++
+
+## 2. Abra o Projeto via WSL no VS Code
+
+Abra o Ubuntu e vá até a pasta do seu projeto:
+```bash
+cd /mnt/c/Users/SEU_USUARIO/Documentos/BlackJack
+```
+Agora digite:
+```bash
+code .
+```
+## 2.1 Direto pelo VS Code
+
+- 1 Abra o VS Code normalmente
+
+- 2 Pressione **"Ctrl + Shift + P"** para abrir a paleta de comandos
+
+- 3 Digite:
+
+```bash
+Remote-WSL: Open Folder in WSL
+```
+
+- 4 Navegue até a pasta do seu projeto:
+
+```bash
+/mnt/c/Users/SEU_USUARIO/Documentos/BlackJack
+```
+
+<!-- 
+## 3. Adicione o seguinte arquivo `.vscode/c_cpp_properties.json`:
+
+
+```json
+{
+  "configurations": [
+    {
+      "name": "WSL",
+      "includePath": [
+        "${workspaceFolder}/include",
+        "/usr/include",
+        "/usr/local/include"
+      ],
+      "defines": [],
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "c11",
+      "intelliSenseMode": "linux-gcc-x64"
+    }
+  ],
+  "version": 4
+}
+> ⚠️ Isso informa ao VS Code que os arquivos .h estão na pasta /include
+
+ -->
+
+<br>
+<br>
+
 # 📄 Licença
 
 Projeto final da matéria de **Sistemas Operacionais**
