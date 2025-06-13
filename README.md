@@ -20,6 +20,18 @@ Este é um projeto em linguagem C que simula o jogo de cartas **Blackjack (21)**
 - Em seguida, o dealer joga com base nas regras da casa.
 - O resultado é exibido e você decide se quer continuar jogando.
 
+## 👥 Multiplayer
+
+- O jogo conta com um **modo multiplayer local**, onde até **5 jogadores** podem jogar por turnos no mesmo terminal.
+- O número de rodadas e de jogadores é definido no início da partida.
+- Possuí a mesma base do jogo principal
+- Se um jogador perder todo o seu saldo incial, ele é eliminado automaticamente 
+
+### 🎯 Objetivo
+- Conseguir o maior saldo entre os jogadores ou ser o único restante.
+
+--- 
+
 ## 🧵 Threads
 
 Este projeto utiliza `pthread` para:
@@ -40,6 +52,7 @@ BlackJack/
 │   ├── interfaces.h
 │   ├── jogador.h
 │   ├── jogo.h
+│   ├── multiplayer.h
 │   └── utils.h
 ├── src/                # Código-fonte (.c)
 │   ├── baralho.c
@@ -48,6 +61,8 @@ BlackJack/
 │   ├── interfaces.c
 │   ├── jogador.c
 │   ├── jogo.c
+│   ├── multiplayer.c
+│   ├── utils.c
 │   └── main.c
 └── README.md
 ```
@@ -58,18 +73,12 @@ BlackJack/
 ### 📌 Requisitos
 
 - Compilador C com suporte a C11 ou superior
-- Biblioteca `pthread` (Linux ou compatível)
+- Ambiente compatível com a biblioteca `pthread`
+- Linux / WSL (Windows Subsystem for Linux) ou compatível
 
-### Linux / WSL (Windows Subsystem for Linux)
+---
 
-Certifique-se de ter o compilador GCC:
-
-```bash
-sudo apt update
-sudo apt install build-essential
-```
-
-Acesse a pasta onde o projeto está (coloque o seu caminho):
+**Acesse a pasta onde o projeto está (coloque o seu caminho)**:
 ```bash
 cd "/mnt/c/Users/.../BlackJack"
 ```
