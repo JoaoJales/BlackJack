@@ -66,6 +66,11 @@ BlackJack/
 │   └── main.c
 └── README.md
 ```
+## 📘 Detalhamento Headers
+
+👉 Veja o detalhamento do funcionamento das **Headers** da **main** no arquivo [`HEADERS.md`](./HEADERS.md)
+
+--- 
 <br>
 <br>
 
