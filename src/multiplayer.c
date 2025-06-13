@@ -186,7 +186,7 @@ void multiplayer(){
             break;
         }
 
-        printf("\t\n Numero de Jogadores invalido!\n");
+        printf("\n\tNúmero de Jogadores inválido!\n");
     }
     numJogadoresAtivos = numJogadores;
 
@@ -196,12 +196,12 @@ void multiplayer(){
         scanf("%d", &numRodadas);
         limpar_buffer();  
         
-        if (numJogadores >= 1 && numJogadores <= 10)
+        if (numRodadas >= 1 && numRodadas <= MAX_RODADAS)
         {
             break;
         }
         
-        printf("\t\n Numero de Rodadas invalido!\n");
+        printf("\n\tNúmero de Rodadas inválido!\n");
     }
 
     DealerInfo dealer;
