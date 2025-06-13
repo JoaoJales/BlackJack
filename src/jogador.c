@@ -14,6 +14,7 @@ JogadorInfo criarJogador() {
     jogador.nome[strcspn(jogador.nome, "\n")] = '\0';
     jogador.num_cartas = 0;
     jogador.saldo = 100.00;
+    jogador.ativo = 1;
 
     sleep(1);
     return jogador;
@@ -55,7 +56,8 @@ void* rotina_jogador(void* arg) {
             imprimir_uma_carta(nova_carta);
             printf("\t----------------------------------------------\n");
 
-            imprimir_cartas(jogador->nome, jogador->cartas, jogador->num_cartas, 0);
+            printf("\t");
+            imprimir_cartas(jogador->cartas, jogador->num_cartas, 0);
         } else {
             printf("\t  🛑 %s decidiu parar com %d pontos.\n", jogador->nome, pontuacao);
             printf("\t----------------------------------------------\n");

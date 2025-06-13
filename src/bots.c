@@ -5,20 +5,16 @@
 #include "bots.h"
 #include "baralho.h"
 #include "utils.h"
+#include "interfaces.h"
 
 void distribuicao_cartas_iniciais_bots(BotsInfo bots[], int num_bots){
-    printf("\t----------------------------------------------\n");
-
     for (int i = 0; i < num_bots; i++) {
-            bots[i].cartas[0] = comprar_carta();
-            bots[i].cartas[1] = comprar_carta();
-            bots[i].num_cartas = 2;
-            
-            printf("\t          🃏 cartas iniciais %s:            \n", bots[i].nome);
-            imprimir_cartas(bots[i].nome, bots[i].cartas, bots[i].num_cartas, 0);
-            printf("\t----------------------------------------------\n");
-            sleep(1);
+        bots[i].cartas[0] = comprar_carta();
+        bots[i].cartas[1] = comprar_carta();
+        bots[i].num_cartas = 2;
+        
     }
+    tela_cartas_iniciais_bot(bots, num_bots);
 }
 
 void inicializar_bots(BotsInfo bots[], int n) {
@@ -34,25 +30,26 @@ void* rotina_bot(void* arg) {
     BotsInfo* bot = (BotsInfo*)arg;
 
     system("clear");
-    printf("\t----------------------------------------------\n");
-    printf("\t          🤖 %s está jogando...\n", bot->nome);
-    imprimir_cartas(bot->nome, bot->cartas, bot->num_cartas, 0);
-    printf("\t----------------------------------------------\n\n");
+    printf("\t┌────────────────────────────────────┐\n");
+    printf("\t \t🤖 %s está jogando...\n\n", bot->nome);
+    printf("\t");
+    imprimir_cartas(bot->cartas, bot->num_cartas, 0);
+    printf("\t└────────────────────────────────────┘\n\n");
 
     sleep(1);
 
     while (1) {
         int pontuacao = calcular_pontuacao(bot->cartas, bot->num_cartas);
-
+        printf("\t----------------------------------------------\n");
         if (pontuacao > 21) {
-            printf("\n\t     💥 %s estourou com %d pontos!\n", bot->nome, pontuacao);
+            printf("\t     💥 %s estourou com %d pontos!\n", bot->nome, pontuacao);
             printf("\t----------------------------------------------\n");
             sleep(2);
             break;
         }
         
         if (pontuacao >= 17) {
-            printf("\n\t    🛑 %s decidiu parar com %d pontos.\n", bot->nome, pontuacao);
+            printf("\t    🛑 %s decidiu parar com %d pontos.\n", bot->nome, pontuacao);
             printf("\t----------------------------------------------\n");
             sleep(2);
             break;
@@ -65,7 +62,8 @@ void* rotina_bot(void* arg) {
 
         printf("\t\t🤖 comprou: ");
         imprimir_uma_carta(nova_carta);
-        imprimir_cartas(bot->nome, bot->cartas, bot->num_cartas, 0);
+        printf("\n\t");
+        imprimir_cartas(bot->cartas, bot->num_cartas, 0);
         printf("\t----------------------------------------------\n");
 
 

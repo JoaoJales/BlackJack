@@ -9,6 +9,7 @@ typedef struct {
     int cartas[MAX_CARTAS];
     int num_cartas;
     double saldo;
+    int ativo;
 } JogadorInfo;
 
 JogadorInfo criarJogador(); 

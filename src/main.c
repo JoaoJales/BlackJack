@@ -5,6 +5,7 @@
 #include "jogador.h"
 #include "interfaces.h"
 #include "jogo.h"
+#include "multiplayer.h"
 
 
 
@@ -31,7 +32,7 @@ int main() {
             game(&jogador);
             break;
         case 2:
-            // estatisticas();
+            multiplayer();
             break;
         case 3:
             tela_como_jogar();

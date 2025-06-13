@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "interfaces.h"
+#include "utils.h"
 
 void limpar_buffer() {
     int c;
@@ -30,10 +31,10 @@ void tela_Inicial(JogadorInfo jogador){
     printf("\t| Jogador: %s      | Saldo: R$%2.lf    |\n", jogador.nome, jogador.saldo);
     printf("\t----------------------------------------\n\n");
     printf("\t           MENU:               \n");
-    printf("\t           Inicia Jogo:  (1)               \n");
+    printf("\t           Iniciar Jogo: (1)               \n");
     printf("\t           Multiplayer:  (2)              \n");
     printf("\t           Como Jogar?   (3)                \n");
-    printf("\t           Creditos:     (4)                \n");
+    printf("\t           Créditos:     (4)                \n");
     printf("\t           Sair do Jogo: (5)              \n\n");
     printf("\t           Escolha uma opcao: ");
 }
@@ -73,6 +74,26 @@ void tela_como_jogar() {
     printf("\t  - Digite o valor da aposta quando solicitado\n");
     printf("\t  - Depois, digite 's' para comprar uma nova carta ou 'n' para parar\n\n");
 
+    printf("\t----------------------------------------------------------------------------------------\n");
+    printf("\t┌────────────────────────────────────┐\n");
+    printf("\t           MODO MULTIPLAYER:\n");
+    printf("\t└────────────────────────────────────┘\n\n");
+
+    printf("\tJogue junto com seus amigos e faça uma competição de Black Jack!\n");
+    printf("\n\tOBJETIVO: \n");
+    printf("\t  - Conseguir o maior saldo ou ser o útlimo restante\n");
+    printf("\n\tCOMO JOGAR:\n");
+    printf("\t  - Digite o número de Jogadores e o número de Rodadas\n");
+    printf("\t  - Cada rodada possuí a mesma base do Black Jack\n");
+    printf("\t  - Se um jogador perder todo o seu saldo incial, ele é eliminado automaticamente\n");
+    printf("\t  - Consiga o maior saldo ou seja o último restante!\n");
+    printf("\t----------------------------------------------------------------------------------------\n\n");
+
+
+    
+
+
+
     printf("\t🎯 Boa sorte e divirta-se!\n\n");
     printf("\tPressione enter para voltar ao menu...");
     getchar();
@@ -86,14 +107,14 @@ void tela_creditos(){
 
     printf("\t------------------------------------------------------------------\n");
     printf("\tProjeto final da materia de Sistemas Operacionais\n");
-    printf("\tObjetivo: desenvolver um jogo utilizando threads e semaforos\n");
+    printf("\tObjetivo: desenvolver um jogo utilizando threads e semafororização\n");
     printf("\tProfessor(a): Beatriz Campos\n");
-    printf("\tUniversidade Catolica de Brasilia\n");
+    printf("\tUniversidade Católica de Brasília\n");
     printf("\t------------------------------------------------------------------\n\n");
 
     printf("\t------------------------------------------------------------------\n");
     printf("\tDesenvolvedores:\n");
-    printf("\t- Joao Ricardo Jales Cirino\n");
+    printf("\t- João Ricardo Jales Cirino\n");
     printf("\t- Felipe Lima Duarte\n");
     printf("\t- Henrique Vinha Rocha\n");
     printf("\t- Gustavo Domingues de Sousa\n");
@@ -107,18 +128,21 @@ void tela_creditos(){
 
 void tela_dados_jogador(JogadorInfo* jogador){
     printf("\t----------------------------------------\n");
-    printf("\t| Jogador: %s      | Saldo: R$%2.lf    |\n", jogador->nome, jogador->saldo);
+    printf("\t| Jogador: %s      | Saldo: R$%2.lf    \n", jogador->nome, jogador->saldo);
     printf("\t----------------------------------------\n\n");
 }
 
-void tela_1_game(double valorAposta){
-        printf("\t----------------------------------------------\n");
-        printf("\t|               Aposta: R$%2.lf                 |\n", valorAposta);
-        printf("\t----------------------------------------------\n");
-        printf("\t----------------------------------------------\n");
-        printf("\t|         🃏 Embaralhando cartas...         |\n");
-        printf("\t----------------------------------------------\n");
-        sleep(1);
+void tela_valor_aposta(double valorAposta){
+    printf("\t----------------------------------------------\n");
+    printf("\t|               Aposta: R$%2.lf                |\n", valorAposta);
+    printf("\t----------------------------------------------\n");
+}
+
+void tela_embaralhando_cartas(){
+    printf("\t----------------------------------------------\n");
+    printf("\t|         🃏 Embaralhando cartas...          |\n");
+    printf("\t----------------------------------------------\n");
+    sleep(1);    
 }
 
 void tela_empate(JogadorInfo* jogador){
@@ -164,7 +188,7 @@ void tela_casa_venceu(JogadorInfo* jogador){
 void tela_estourou(JogadorInfo* jogador){
     system("clear");
     printf("\t------------------------------------------------\n");
-    printf("\t|        💥 Voce estourou 💥 Casa vence.      |\n");
+    printf("\t|        💥 Você estourou 💥 Casa vence.      |\n");
     printf("\t------------------------------------------------\n");
     printf("\t------------------------------------------------\n");
     printf("\t                  Saldo: R$%2.lf              \n", jogador->saldo);
@@ -179,21 +203,68 @@ void tela_1_pontuacao_final(int pont_dealer, int pont_jogador){
     system("clear");
     printf("\n\t----------------------------------------------\n");
     printf("\t            🏁 Pontuação Final:\n");
+    printf("\t----------------------------------------------\n");
     sleep(1);
-    printf("\t             Casa: %d\n", pont_dealer);
+    printf("\n\t┌─────────┐\n");
+    printf("\t Casa: %d\n", pont_dealer);
+    printf("\t└─────────┘\n");
     sleep(1);
-    printf("\t             Voce: %d\n", pont_jogador);
-    printf("\t------------------------------------------------\n");
+    printf("\n\t┌─────────┐\n");
+    printf("\t Você: %d\n", pont_jogador);
+    printf("\t└─────────┘\n");
+    sleep(1);
+
+    printf("\n\t------------------------------------------------\n");
     
 }
 
 void tela_2_pontuacao_final(int* pont_bots, BotsInfo bots[]){
     for (int i = 0; i < NUM_BOTS; i++)
     {
-        printf("\t             %s: %d\n", bots[i].nome, pont_bots[i]);
+        printf("\n\t┌──────────┐\n");
+        printf("\t %s: %d\n", bots[i].nome, pont_bots[i]);
+        printf("\t└──────────┘\n");
+
         sleep(1);
     }
-    printf("\t------------------------------------------------\n");
     sleep(5);
+    
+}
+
+void tela_distribuindo_cartas(){
+    printf("\t----------------------------------------------\n");
+    printf("\t|         🃏 Distribuindo as cartas...       |\n");
+    printf("\t----------------------------------------------\n");
+    sleep(1);
+}
+
+void tela_cartas_iniciais_jogador(JogadorInfo* jogador){
+    printf("\n\t┌────────────────────────────────────┐\n");
+    printf("\t\t🃏 Suas cartas iniciais:      \n");
+    printf("\t");
+    imprimir_cartas(jogador->cartas, jogador->num_cartas, 0);
+    printf("\t└────────────────────────────────────┘\n");
+    sleep(1);
+}
+
+void tela_cartas_iniciais_dealer(DealerInfo* dealer){
+    printf("\n\t┌────────────────────────────────────┐\n");
+    printf("\t\t🃏 Cartas da Casa:              \n");
+    printf("\t");
+    imprimir_cartas(dealer->cartas, dealer->num_cartas, 1);
+    printf("\t└────────────────────────────────────┘\n");
+    sleep(1);
+}
+
+void tela_cartas_iniciais_bot(BotsInfo bots[], int numBots){
+    for (int i = 0; i < numBots; i++)
+    {
+        printf("\n\t┌────────────────────────────────────┐\n");
+        printf("\t\t🃏 cartas iniciais %s:            \n", bots[i].nome);
+        printf("\t");
+        imprimir_cartas(bots[i].cartas, bots[i].num_cartas, 0);
+        printf("\t└────────────────────────────────────┘\n");
+        sleep(1);
+    }
     
 }

@@ -28,8 +28,8 @@ int calcular_pontuacao(int* cartas, int num_cartas) {
     return soma;
 }
 
-void imprimir_cartas(const char* nome, int* cartas, int num_cartas, int esconder_primeira) {
-    printf("\t        %s: ", nome);
+void imprimir_cartas(int* cartas, int num_cartas, int esconder_primeira) {
+    printf("\t");
     for (int i = 0; i < num_cartas; i++) {
         if (i == 0 && esconder_primeira) {
             printf("[??] ");

@@ -57,7 +57,7 @@ double aposta(JogadorInfo* jogador) {
     printf("\t--------------------------------------\n");
     printf("\t          Apostando R$%2.lf...        \n", (double)valor_aposta);
     printf("\t---------------------------------------\n");
-    sleep(3);
+    sleep(2);
 
     jogador->saldo -= valor_aposta;
     return (double)valor_aposta;
@@ -81,33 +81,20 @@ void pontuacao_final(int pont_dealer, int pont_jogador, JogadorInfo* jogador, do
     sleep(1);
 }
 
-void distribuicao_cartas_iniciais(DealerInfo* dealer, JogadorInfo* jogador){
+void distribuicao_cartas_iniciais_dealer(DealerInfo* dealer){
     dealer->cartas[0] = comprar_carta();
-    sleep(1);
     dealer->cartas[1] = comprar_carta();
     dealer->num_cartas = 2;
 
-    sleep(1);
+    tela_cartas_iniciais_dealer(dealer);
+}
+
+void distribuicao_cartas_iniciais_jogador(JogadorInfo* jogador){
     jogador->cartas[0] = comprar_carta();
-    sleep(1);
     jogador->cartas[1] = comprar_carta();
     jogador->num_cartas = 2;
 
-    printf("\t----------------------------------------------\n");
-    printf("\t|         🃏 Distribuindo as cartas...       |\n");
-    printf("\t----------------------------------------------\n");
-    sleep(1);
-
-    printf("\t              🃏 Cartas da Casa:              \n");
-    imprimir_cartas("Casa", dealer->cartas, dealer->num_cartas, 1);
-    printf("\t----------------------------------------------\n");
-    sleep(1);
-
-
-    printf("\t          🃏 Suas cartas iniciais:            \n");
-    imprimir_cartas(jogador->nome, jogador->cartas, jogador->num_cartas, 0);
-    printf("\t----------------------------------------------\n\n");
-    sleep(1);
+    tela_cartas_iniciais_jogador(jogador);
 }
 
 void game(JogadorInfo* jogador){
@@ -121,15 +108,23 @@ void game(JogadorInfo* jogador){
 
         system("clear");
         tela_dados_jogador(jogador);
-        tela_1_game(valorAposta);
+        tela_valor_aposta(valorAposta);
+        tela_embaralhando_cartas();
+        tela_distribuindo_cartas();
+        sleep(3);
+        system("clear");
+        tela_dados_jogador(jogador);
+        tela_valor_aposta(valorAposta);
 
-        distribuicao_cartas_iniciais(&dealer, jogador);
+        distribuicao_cartas_iniciais_dealer(&dealer);
+        distribuicao_cartas_iniciais_jogador(jogador);
         distribuicao_cartas_iniciais_bots(bots, NUM_BOTS);
 
         //Declara as threads
         pthread_t thread_jogador, thread_dealer, threads_bots[NUM_BOTS];
 
         //Jogador
+        printf("\t==================================================================\n");
         pthread_create(&thread_jogador, NULL, rotina_jogador, (void*)jogador);
         void* retorno_jogador;
         pthread_join(thread_jogador, &retorno_jogador);

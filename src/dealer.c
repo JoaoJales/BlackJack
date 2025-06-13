@@ -11,15 +11,24 @@
 void* rotina_dealer(void* arg) {
     DealerInfo* dealerInfo = (DealerInfo*)arg;
     system("clear");
-    printf("\n\t----------------------------------------------\n");
-    printf("\t          🃏 2º carta da Casa: ");
+    printf("\t-----------------------------------------------\n");
+    printf("\t|             Casa está jogando...               |\n");
+    printf("\t-----------------------------------------------\n");
+
+    printf("\n\t┌────────────────────────────────────────┐\n");
+    printf("\t\t🃏 2º carta da Casa: ");
     imprimir_uma_carta(dealerInfo->cartas[0]);
     printf("\n");
+    printf("\t");
+    imprimir_cartas(dealerInfo->cartas, dealerInfo->num_cartas, 0);
+    printf("\t└────────────────────────────────────────┘\n");
 
-    imprimir_cartas("Casa", dealerInfo->cartas, dealerInfo->num_cartas, 0);
-    sleep(2);
+    sleep(3);
 
-    printf("\t----------------------------------------------\n");
+
+
+    printf("\n\t----------------------------------------------\n");
+
     while (1)
     {
         int pontuacao = calcular_pontuacao(dealerInfo->cartas, dealerInfo->num_cartas);
@@ -46,14 +55,16 @@ void* rotina_dealer(void* arg) {
         dealerInfo->num_cartas++;
 
         
-        printf("\t             Casa comprou: ");
+        printf("\t\tCasa comprou: ");
         imprimir_uma_carta(nova_carta);
+        printf("\n\t");
+        imprimir_cartas(dealerInfo->cartas, dealerInfo->num_cartas, 0);
         printf("\t----------------------------------------------\n");
-        imprimir_cartas("Casa", dealerInfo->cartas, dealerInfo->num_cartas, 0);
+
         sleep(3);
     }
     
-    sleep(5);
+    sleep(4);
 
     int* resultado = malloc(sizeof(int));
     *resultado = calcular_pontuacao(dealerInfo->cartas, dealerInfo->num_cartas);
